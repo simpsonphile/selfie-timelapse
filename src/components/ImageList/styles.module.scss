@@ -1,0 +1,12 @@
+.ImageList {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  img {
+    display: block;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+}
