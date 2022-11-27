@@ -6,13 +6,15 @@ import generateSelfieTimeLapse from './services/generateSelfieTimelapse';
 
 function App() {
   const [files, setFiles] = useState({});
+  const [generatedImages, setGeneratedImages] = useState([]);
   const fileUrls = Object.values(files).map((file) =>
     URL.createObjectURL(file)
   );
 
-  const generate = () => {
-    console.log('generate');
-    generateSelfieTimeLapse({ files });
+  const generate = async () => {
+    const newImages = await generateSelfieTimeLapse({ files });
+
+    setGeneratedImages(newImages);
   };
 
   return (
@@ -22,6 +24,8 @@ function App() {
       <ImageList srcs={fileUrls} onImageClick={console.log} />
 
       {!!fileUrls.length && <Button onClick={generate}>generate</Button>}
+
+      <ImageList srcs={generatedImages} />
     </div>
   );
 }

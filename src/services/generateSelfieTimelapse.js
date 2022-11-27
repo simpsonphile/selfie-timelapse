@@ -6,6 +6,22 @@ const generateImageFromFile = ({ file }) => {
   return img;
 };
 
+const transformImage = async (image, scale, dx, dy) => {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  const newImage = document.createElement('img');
+
+  ctx.drawImage(image, dx, dy, image.width * scale, image.height * scale);
+
+  const url = canvas.toDataURL();
+
+  newImage.src = url;
+
+  return await new Promise((resolve) => {
+    newImage.onload = (e) => resolve(e.target);
+  });
+};
+
 // const cropImage = ({ image, dx, dy, sx, sy, nWidth, nHeight }) => {
 //   const canvas = document.createElement('canvas');
 //   const ctx = canvas.getContext('2d');
@@ -41,11 +57,11 @@ const generateImagesFromFiles = async (files) => {
   const promises = files.map(
     (file) =>
       new Promise((resolve) => {
-        const sourceImg = generateImageFromFile({ file });
+        const source = generateImageFromFile({ file });
 
-        sourceImg.onload = (e) => {
+        source.onload = (e) => {
           resolve({
-            source: e.path[0].currentSrc,
+            source,
             naturalWidth: e.path[0].naturalWidth,
             naturalHeight: e.path[0].naturalHeight,
           });
@@ -58,27 +74,31 @@ const generateImagesFromFiles = async (files) => {
   return resolved;
 };
 
+const generateFaceDetailsFromImages = async (images) => {
+  const promises = images.map(
+    (img) =>
+      new Promise((resolve) =>
+        resolve(
+          FaceDataService.getFaceDetails({
+            source: img.source,
+            displaySize: { width: img.naturalWidth, height: img.naturalHeight },
+          })
+        )
+      )
+  );
+
+  const resolved = await Promise.all(promises);
+
+  return resolved;
+};
+
 const generateSelfieTimeLapse = async ({ files }) => {
   const filesArr = Object.values(files);
   const images = await generateImagesFromFiles(filesArr);
 
-  console.log(images);
-  const promises = filesArr.map((img) => {
-    const sourceImg = generateImageFromFile({ file: img });
-    console.log(sourceImg, sourceImg.naturalWidth, sourceImg.naturalHeight);
-    return new Promise((resolve) =>
-      resolve(
-        FaceDataService.getFaceDetails({
-          source: generateImageFromFile({ file: img }),
-          displaySize: { width: 600, height: 600 },
-        })
-      )
-    );
-  });
+  const faceDetails = await generateFaceDetailsFromImages(images);
 
-  const resolved = await Promise.all(promises);
-
-  const faces = resolved
+  const faces = faceDetails
     .filter((face) => face.length === 1)
     .map((face) => face[0])
     .map((face) => {
@@ -102,11 +122,12 @@ const generateSelfieTimeLapse = async ({ files }) => {
   }, 0);
 
   const leftEyePositions = faces.map((face) => {
-    const ratio = smallestEyesDistance / face.eyesDistance;
+    const scale = smallestEyesDistance / face.eyesDistance;
 
     return {
-      x: face.leftEyeCenter.x * ratio,
-      y: face.leftEyeCenter.y * ratio,
+      scale,
+      x: face.leftEyeCenter.x * scale,
+      y: face.leftEyeCenter.y * scale,
     };
   });
 
@@ -121,6 +142,7 @@ const generateSelfieTimeLapse = async ({ files }) => {
   }, 0);
 
   const imageTransforms = leftEyePositions.map((leftEyePos) => ({
+    scale: leftEyePos.scale,
     dx: smallestLeftEyeDx - leftEyePos.x,
     dy: smallestLeftEyeDy - leftEyePos.y,
   }));
@@ -129,22 +151,16 @@ const generateSelfieTimeLapse = async ({ files }) => {
 
   console.log(imageTransforms);
 
-  console.log(filesArr);
+  console.log(images.map((img) => img.source));
 
-  // pick smallest image as point of reference
-  // calculate resize of images
-  // calculate dx dy
+  const newImages = await Promise.all(
+    images.map((image, i) => {
+      const { scale, dx, dy } = imageTransforms[i];
+      return transformImage(image.source, scale, dx, dy);
+    })
+  );
 
-  // get only ones that have array with length 1
-  // take element left and right eye
-  // calculate eye size
-  // calculate left eye position
-  // map rest of elements and:
-  // - calculate eye size
-  // - calculate left eye position
-  // - check dif size from first
-  // - scale to first
-  // - calculate photo dx dy
+  return newImages.map((img) => img.currentSrc);
 };
 
 export default generateSelfieTimeLapse;
