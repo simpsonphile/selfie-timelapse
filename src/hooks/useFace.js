@@ -11,7 +11,7 @@ const displaySize = {
 const useFace = ({ source }) => {
   const [isModelsLoaded, setIsModelsLoaded] = useState(false);
   const [detections, setDetections] = useState(null);
-
+  console.log(source);
   useEffect(() => {
     const loadModels = async () => {
       Promise.all([
@@ -36,7 +36,8 @@ const useFace = ({ source }) => {
       faceapi
         .detectAllFaces(source, new faceapi.TinyFaceDetectorOptions())
         .withFaceLandmarks()
-        .withFaceExpressions()
+        .withFaceDescriptors()
+        // .withFaceExpressions()
         .then((res) => {
           setDetections(faceapi.resizeResults(res, displaySize));
         });

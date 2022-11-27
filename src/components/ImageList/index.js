@@ -1,11 +1,16 @@
 import Image from '../Image';
 import styles from './styles.module.scss';
 
-const ImageList = ({ srcs }) => {
+const ImageList = ({ srcs, ImageComponent = Image, onImageClick }) => {
   return (
     <div className={styles.ImageList}>
       {srcs.map((src, index) => (
-        <Image key={src} src={src} alt={`image ${index}`} />
+        <ImageComponent
+          key={src}
+          src={src}
+          alt={`image ${index}`}
+          onClick={() => onImageClick({ src, index })}
+        />
       ))}
     </div>
   );

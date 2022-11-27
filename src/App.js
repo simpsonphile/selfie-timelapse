@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Button from './components/Button';
 import FileUploadField from './components/FileUploadField';
 import ImageList from './components/ImageList';
+import generateSelfieTimeLapse from './services/generateSelfieTimelapse';
 
 function App() {
   const [files, setFiles] = useState({});
@@ -9,14 +10,18 @@ function App() {
     URL.createObjectURL(file)
   );
 
-  const generate = console.log;
+  const generate = () => {
+    console.log('generate');
+    generateSelfieTimeLapse({ files });
+  };
+
   return (
     <div className="App">
       <FileUploadField label="hehe" multiple onChange={setFiles} />
 
-      <ImageList srcs={fileUrls} />
+      <ImageList srcs={fileUrls} onImageClick={console.log} />
 
-      {fileUrls.length > 1 && <Button onClick={generate}>generate</Button>}
+      {!!fileUrls.length && <Button onClick={generate}>generate</Button>}
     </div>
   );
 }
