@@ -6,10 +6,12 @@ const generateImageFromFile = ({ file }) => {
   return img;
 };
 
-const transformImage = async (image, scale, dx, dy) => {
+const transformImage = async (image, scale, dx, dy, nWidth, nHeight) => {
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
   const newImage = document.createElement('img');
+  canvas.width = nWidth;
+  canvas.height = nHeight;
 
   ctx.drawImage(image, dx, dy, image.width * scale, image.height * scale);
 
@@ -21,16 +23,6 @@ const transformImage = async (image, scale, dx, dy) => {
     newImage.onload = (e) => resolve(e.target);
   });
 };
-
-// const cropImage = ({ image, dx, dy, sx, sy, nWidth, nHeight }) => {
-//   const canvas = document.createElement('canvas');
-//   const ctx = canvas.getContext('2d');
-//   const newImage = document.createElement('img');
-
-//   ctx.drawImage(image, dx, dy);
-
-//   return newImage;
-// };
 
 const getCenterOfPoints = (points) => {
   const combinedPoints = points.reduce(
@@ -147,16 +139,31 @@ const generateSelfieTimeLapse = async ({ files }) => {
     dy: smallestLeftEyeDy - leftEyePos.y,
   }));
 
-  console.log(smallestEyesDistance, smallestLeftEyeDx, smallestLeftEyeDy);
+  const theSmallestWidth = imageTransforms.reduce((prev, cur, i) => {
+    const curSmallestWidth = images[i].naturalWidth * cur.scale - cur.dx;
+    if (curSmallestWidth < prev) return curSmallestWidth;
+    return prev;
+  }, 10000);
 
-  console.log(imageTransforms);
+  const theSmallestHeight = imageTransforms.reduce((prev, cur, i) => {
+    const curSmallestHeight = images[i].naturalHeight * cur.scale - cur.dx;
+    if (curSmallestHeight < prev) return curSmallestHeight;
+    return prev;
+  }, 10000);
 
-  console.log(images.map((img) => img.source));
+  console.log(theSmallestHeight, theSmallestWidth);
 
   const newImages = await Promise.all(
     images.map((image, i) => {
       const { scale, dx, dy } = imageTransforms[i];
-      return transformImage(image.source, scale, dx, dy);
+      return transformImage(
+        image.source,
+        scale,
+        dx,
+        dy,
+        theSmallestWidth,
+        theSmallestHeight
+      );
     })
   );
 
