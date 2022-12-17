@@ -66,17 +66,19 @@ const generateImagesFromFiles = async (files) => {
   return resolved;
 };
 
-const generateFaceDetailsFromImages = async (images) => {
-  const promises = images.map(
-    (img) =>
-      new Promise((resolve) =>
-        resolve(
-          FaceDataService.getFaceDetails({
-            source: img.source,
-            displaySize: { width: img.naturalWidth, height: img.naturalHeight },
-          })
-        )
+const generateFaceDetailsFromImages = async ({ images, onResolve }) => {
+  const promises = images.map((img) =>
+    new Promise((resolve) =>
+      resolve(
+        FaceDataService.getFaceDetails({
+          source: img.source,
+          displaySize: { width: img.naturalWidth, height: img.naturalHeight },
+        })
       )
+    ).then((res) => {
+      onResolve(res);
+      return res;
+    })
   );
 
   const resolved = await Promise.all(promises);
@@ -84,11 +86,14 @@ const generateFaceDetailsFromImages = async (images) => {
   return resolved;
 };
 
-const generateSelfieTimeLapse = async ({ files }) => {
+const generateSelfieTimeLapse = async ({ files, onResolve }) => {
   const filesArr = Object.values(files);
   const images = await generateImagesFromFiles(filesArr);
 
-  const faceDetails = await generateFaceDetailsFromImages(images);
+  const faceDetails = await generateFaceDetailsFromImages({
+    images,
+    onResolve,
+  });
 
   const faces = faceDetails
     .map((face, i) => ({ face: face?.[0], source: images[i] }))
@@ -152,8 +157,6 @@ const generateSelfieTimeLapse = async ({ files }) => {
     if (curSmallestHeight < prev) return curSmallestHeight;
     return prev;
   }, 10000);
-
-  console.log(theSmallestHeight, theSmallestWidth);
 
   const newImages = await Promise.all(
     faces.map(({ source }, i) => {

@@ -1,0 +1,17 @@
+.ImageListPaginated {
+  &Header {
+    display: flex;
+    gap: 40px;
+    justify-content: space-between;
+
+    &Btns {
+      display: flex;
+      gap: 20px;
+    }
+
+    &Pages {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

@@ -1,5 +1,9 @@
 .Button {
-  display: block;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  line-height: 40px;
+  text-align: center;
   height: 40px;
   min-width: 120px;
   border: 0;
@@ -7,4 +11,9 @@
   border-radius: 20px;
   color: var(--text-inverted);
   background-color: var(--primary);
+  transition: all .3s;
+
+  &:hover {
+    opacity: .9;
+  }
 }
