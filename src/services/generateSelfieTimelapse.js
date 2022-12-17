@@ -91,9 +91,9 @@ const generateSelfieTimeLapse = async ({ files }) => {
   const faceDetails = await generateFaceDetailsFromImages(images);
 
   const faces = faceDetails
-    .filter((face) => face.length === 1)
-    .map((face) => face[0])
-    .map((face) => {
+    .map((face, i) => ({ face: face?.[0], source: images[i] }))
+    .filter(({ face }) => !!face)
+    .map(({ face, source }) => {
       const leftEye = face.landmarks.getLeftEye();
       const rightEye = face.landmarks.getRightEye();
       const leftEyeCenter = getCenterOfPoints(leftEye);
@@ -103,6 +103,7 @@ const generateSelfieTimeLapse = async ({ files }) => {
         rightEyeCenter
       );
       return {
+        source,
         leftEyeCenter,
         eyesDistance,
       };
@@ -140,13 +141,14 @@ const generateSelfieTimeLapse = async ({ files }) => {
   }));
 
   const theSmallestWidth = imageTransforms.reduce((prev, cur, i) => {
-    const curSmallestWidth = images[i].naturalWidth * cur.scale - cur.dx;
+    const curSmallestWidth = faces[i].source.naturalWidth * cur.scale + cur.dx;
     if (curSmallestWidth < prev) return curSmallestWidth;
     return prev;
   }, 10000);
 
   const theSmallestHeight = imageTransforms.reduce((prev, cur, i) => {
-    const curSmallestHeight = images[i].naturalHeight * cur.scale - cur.dx;
+    const curSmallestHeight =
+      faces[i].source.naturalHeight * cur.scale + cur.dy;
     if (curSmallestHeight < prev) return curSmallestHeight;
     return prev;
   }, 10000);
@@ -154,10 +156,10 @@ const generateSelfieTimeLapse = async ({ files }) => {
   console.log(theSmallestHeight, theSmallestWidth);
 
   const newImages = await Promise.all(
-    images.map((image, i) => {
+    faces.map(({ source }, i) => {
       const { scale, dx, dy } = imageTransforms[i];
       return transformImage(
-        image.source,
+        source.source,
         scale,
         dx,
         dy,

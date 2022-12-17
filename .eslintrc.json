@@ -27,9 +27,6 @@
       "noSortAlphabetically": true,
       "reservedFirst": true
     }],
-    "react/forbid-component-props": ["error", {
-      "forbid": ["className", "style"]
-    }],
     "react/no-multi-comp": "error",
     "react/jsx-no-useless-fragment": "error",
     "react/no-children-prop": "error",
