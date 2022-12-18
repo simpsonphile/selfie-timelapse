@@ -5,8 +5,12 @@ import { BsDownload } from 'react-icons/bs';
 const Upload = () => {
   const {
     state: { zipURL },
-    actions: { resetStore },
+    actions: { resetStore, setCurrentStep },
   } = useTimelapseContext();
+
+  const goBack = () => {
+    setCurrentStep('EDIT');
+  };
 
   return (
     <div>
@@ -17,6 +21,7 @@ const Upload = () => {
         </Button>
       )}
       <Button onClick={resetStore}>Try again</Button>
+      <Button onClick={goBack}>Go back to edit</Button>
     </div>
   );
 };
