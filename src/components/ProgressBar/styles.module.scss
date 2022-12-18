@@ -1,8 +1,10 @@
 .ProgressBar {
-  height: 16px;
-  border-radius: var(--radius);
+  height: 8px;
   overflow: hidden;
-  border: 1px solid black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
 
   &:after {
     content: '';

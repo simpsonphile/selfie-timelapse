@@ -2,9 +2,9 @@ html {
   --primary: #0ad3ff;
   --gray: #E1FAF9;
   --text-inverted: white;
-  --text: black;
+  --text: #170312;
 
-  --box-shadow: 1px 1px 1px 1px rgba(0,0,0, .33);
+  --box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
   --radius: 20px;
 
   --g1: 4px;
@@ -12,4 +12,9 @@ html {
   --g3: 16px;
   --g4: 24px;
   --g5: 32px;
+}
+
+body {
+  background-color: #FFE5D4;
+  color: var(--text);
 }

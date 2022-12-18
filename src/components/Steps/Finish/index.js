@@ -1,5 +1,6 @@
 import { useTimelapseContext } from '../../../contexts/TimelapseContext';
 import Button from '../../Button';
+import { BsDownload } from 'react-icons/bs';
 
 const Upload = () => {
   const {
@@ -11,7 +12,7 @@ const Upload = () => {
     <div>
       <h2>Your timelapse is ready to download!</h2>
       {!!zipURL && (
-        <Button href={zipURL} as="a">
+        <Button href={zipURL} as="a" icoRight={<BsDownload />}>
           download images as zip
         </Button>
       )}
