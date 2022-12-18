@@ -7,7 +7,7 @@ const Upload = () => {
   } = useTimelapseContext();
 
   const onFileUpload = (files) => {
-    setImages(files);
+    setImages(Object.values(files).map((file) => URL.createObjectURL(file)));
     setCurrentStep('EDIT');
   };
 

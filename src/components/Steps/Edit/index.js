@@ -3,7 +3,6 @@ import Button from '../../Button';
 import Card from '../../Card';
 import ImageListPaginated from '../../ImageListPaginated';
 import styles from './styles.module.scss';
-import { useMemo } from 'react';
 import Spinner from '../../Spinner';
 const Upload = () => {
   const {
@@ -11,14 +10,9 @@ const Upload = () => {
     actions: { generateTimelapse, toggleImage },
   } = useTimelapseContext();
 
-  const imageUrls = useMemo(
-    () => Object.values(images).map((img) => URL.createObjectURL(img)),
-    [images]
-  );
-
   return (
     <div>
-      {!!imageUrls.length && (
+      {!!images.length && (
         <div className={styles.EditHeader}>
           <h2>Choose uploaded files</h2>
           <Button
@@ -30,10 +24,10 @@ const Upload = () => {
           </Button>
         </div>
       )}
-      {!!imageUrls.length && (
+      {!!images.length && (
         <Card>
           <ImageListPaginated
-            srcs={imageUrls}
+            srcs={images}
             isImageDisabled={({ src }) => disabledImages.includes(src)}
             onImageClick={({ src }) => toggleImage(src)}
           />

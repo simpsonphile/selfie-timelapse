@@ -1,6 +1,7 @@
 import * as ACTION_NAMES from './actionNames';
 import generateSelfieTimeLapse from '../../services/generateSelfieTimelapse';
 import { generateZipURLFromFiles } from '../../services/generateZipFromFiles';
+import difference from 'lodash/difference';
 
 export const resetStore =
   ({ dispatch }) =>
@@ -86,7 +87,8 @@ export const toggleImage =
 export const generateTimelapse =
   ({ dispatch, getState }) =>
   async () => {
-    const { images } = getState();
+    const { images, disabledImages } = getState();
+    const selectedImages = difference(images, disabledImages);
 
     const onResolve = () => {
       incrementProgress({ dispatch })();
@@ -96,7 +98,7 @@ export const generateTimelapse =
     setProgress({ dispatch })(0);
 
     const transformedImages = await generateSelfieTimeLapse({
-      files: images,
+      files: selectedImages,
       onResolve,
     });
 

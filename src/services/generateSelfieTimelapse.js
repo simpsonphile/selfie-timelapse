@@ -1,8 +1,8 @@
 import FaceDataService from './FaceDataService';
 
-const generateImageFromFile = ({ file }) => {
+const getImgFromSrc = ({ src }) => {
   const img = document.createElement('img');
-  img.src = URL.createObjectURL(file);
+  img.src = src;
   return img;
 };
 
@@ -47,9 +47,9 @@ const getDistanceBetweenPoints = (p1, p2) => {
 
 const generateImagesFromFiles = async (files) => {
   const promises = files.map(
-    (file) =>
+    (src) =>
       new Promise((resolve) => {
-        const source = generateImageFromFile({ file });
+        const source = getImgFromSrc({ src });
 
         source.onload = (e) => {
           resolve({
