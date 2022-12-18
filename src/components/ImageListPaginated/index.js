@@ -3,7 +3,7 @@ import Button from '../Button';
 import ImageList from '../ImageList';
 import styles from './styles.module.scss';
 
-const ImageListPaginated = ({ srcs, perPage = 10, ...otherProps }) => {
+const ImageListPaginated = ({ srcs, perPage = 15, ...otherProps }) => {
   const [currentPage, setCurrentPage] = useState(0);
 
   const pages = Math.ceil(srcs.length / perPage);

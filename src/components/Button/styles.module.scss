@@ -6,9 +6,10 @@
   text-align: center;
   height: 40px;
   min-width: 120px;
+  padding: 0 var(--g3);
   border: 0;
   outline: 0;
-  border-radius: 20px;
+  border-radius: var(--radius);
   color: var(--text-inverted);
   background-color: var(--primary);
   transition: all .3s;

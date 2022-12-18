@@ -4,16 +4,18 @@ import Button from '../../Button';
 const Upload = () => {
   const {
     state: { zipURL },
+    actions: { resetStore },
   } = useTimelapseContext();
 
   return (
     <div>
-      <h2>Download files</h2>
+      <h2>Your timelapse is ready to download!</h2>
       {!!zipURL && (
         <Button href={zipURL} as="a">
-          as zip
+          download images as zip
         </Button>
       )}
+      <Button onClick={resetStore}>Try again</Button>
     </div>
   );
 };

@@ -2,6 +2,13 @@ import * as ACTION_NAMES from './actionNames';
 import generateSelfieTimeLapse from '../../services/generateSelfieTimelapse';
 import { generateZipURLFromFiles } from '../../services/generateZipFromFiles';
 
+export const resetStore =
+  ({ dispatch }) =>
+  () =>
+    dispatch({
+      type: ACTION_NAMES.RESET_STORE,
+    });
+
 export const setImages =
   ({ dispatch }) =>
   (payload) =>
@@ -50,6 +57,14 @@ export const setTimelapseLoading =
       payload,
     });
 
+export const setProgress =
+  ({ dispatch }) =>
+  (payload) =>
+    dispatch({
+      type: ACTION_NAMES.SET_PROGRESS,
+      payload,
+    });
+
 export const toggleImage =
   ({ dispatch, getState }) =>
   (src) => {
@@ -78,6 +93,7 @@ export const generateTimelapse =
     };
 
     setTimelapseLoading({ dispatch })(true);
+    setProgress({ dispatch })(0);
 
     const transformedImages = await generateSelfieTimeLapse({
       files: images,

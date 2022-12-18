@@ -1,6 +1,6 @@
 .ProgressBar {
-  height: 15px;
-  border-radius: 20px;
+  height: 16px;
+  border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid black;
 
@@ -12,6 +12,7 @@
     background-color: var(--primary);
     position: relative;
     left: -100%;
+    transition: transform .3s;
     transform: translateX(var(--progress));
   }
 }

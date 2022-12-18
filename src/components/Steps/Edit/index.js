@@ -2,13 +2,12 @@ import { useTimelapseContext } from '../../../contexts/TimelapseContext';
 import Button from '../../Button';
 import Card from '../../Card';
 import ImageListPaginated from '../../ImageListPaginated';
-import ProgressBar from '../../ProgressBar';
 import styles from './styles.module.scss';
 import { useMemo } from 'react';
 
 const Upload = () => {
   const {
-    state: { images, disabledImages, progress, timelapseLoading },
+    state: { images, disabledImages },
     actions: { generateTimelapse, toggleImage },
   } = useTimelapseContext();
 
@@ -19,13 +18,10 @@ const Upload = () => {
 
   return (
     <div>
-      <h2>Choose/edit uploaded files</h2>
       {!!imageUrls.length && (
         <div className={styles.EditHeader}>
+          <h2>Choose/edit uploaded files</h2>
           <Button onClick={generateTimelapse}>generate</Button>
-          {timelapseLoading && (
-            <ProgressBar done={progress} parts={images.length} />
-          )}
         </div>
       )}
       {!!imageUrls.length && (

@@ -1,12 +1,13 @@
 .ImageListPaginated {
   &Header {
     display: flex;
-    gap: 40px;
+    gap: var(--g5);
+    margin-bottom: var(--g3);
     justify-content: space-between;
 
     &Btns {
       display: flex;
-      gap: 20px;
+      gap: var(--g3);
     }
 
     &Pages {

@@ -5,10 +5,10 @@ import { STEPS, useTimelapseContext } from './contexts/TimelapseContext';
 import Upload from './components/Steps/Upload';
 import Edit from './components/Steps/Edit';
 import Finish from './components/Steps/Finish';
-
+import ProgressBar from './components/ProgressBar';
 function App() {
   const {
-    state: { currentStep },
+    state: { currentStep, progress, timelapseLoading, images },
   } = useTimelapseContext();
 
   const currentStepElement = () => {
@@ -24,7 +24,14 @@ function App() {
     }
   };
 
-  return <Layout>{currentStepElement()}</Layout>;
+  return (
+    <Layout>
+      {timelapseLoading && (
+        <ProgressBar done={progress} parts={images.length} />
+      )}
+      {currentStepElement()}
+    </Layout>
+  );
 }
 
 export default App;

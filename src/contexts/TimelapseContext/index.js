@@ -28,6 +28,10 @@ const reducer = (state, action) => {
   const { type } = action;
 
   switch (type) {
+    case ACTION_NAMES.RESET_STORE:
+      return {
+        ...initialState,
+      };
     case ACTION_NAMES.INCREMENT_PROGRESS:
       return {
         ...state,
