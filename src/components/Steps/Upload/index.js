@@ -1,5 +1,5 @@
 import { useTimelapseContext } from '../../../contexts/TimelapseContext';
-import FileUploadField from '../../FileUploadField';
+import UploadDropzone from '../../UploadDropzone';
 
 const Upload = () => {
   const {
@@ -13,7 +13,7 @@ const Upload = () => {
 
   return (
     <div>
-      <FileUploadField multiple onChange={onFileUpload} />
+      <UploadDropzone onDrop={onFileUpload} />
     </div>
   );
 };

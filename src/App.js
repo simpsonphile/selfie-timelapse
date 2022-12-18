@@ -6,6 +6,7 @@ import Upload from './components/Steps/Upload';
 import Edit from './components/Steps/Edit';
 import Finish from './components/Steps/Finish';
 import ProgressBar from './components/ProgressBar';
+
 function App() {
   const {
     state: { currentStep, progress, timelapseLoading, images },
