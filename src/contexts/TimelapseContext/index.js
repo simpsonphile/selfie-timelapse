@@ -14,6 +14,7 @@ const initialState = {
   currentStep: STEPS.UPLOAD,
   progress: 0,
   images: [],
+  disabledImages: [],
   transformedImages: [],
   zipURL: '',
   timelapseLoading: false,

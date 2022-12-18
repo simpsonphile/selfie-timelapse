@@ -8,9 +8,10 @@ const Upload = () => {
 
   return (
     <div>
+      <h2>Download files</h2>
       {!!zipURL && (
         <Button href={zipURL} as="a">
-          Download files
+          as zip
         </Button>
       )}
     </div>

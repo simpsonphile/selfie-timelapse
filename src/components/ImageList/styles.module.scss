@@ -1,12 +1,14 @@
 .ImageList {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 20px;
 
   img {
     display: block;
-    width: 20%;
-    height: auto;
+    width: 100%;
+  }
+
+  &ImageDisabled {
+    filter: grayscale(100%);
   }
 }

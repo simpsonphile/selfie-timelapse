@@ -50,6 +50,24 @@ export const setTimelapseLoading =
       payload,
     });
 
+export const toggleImage =
+  ({ dispatch, getState }) =>
+  (src) => {
+    const { disabledImages } = getState();
+    const isToggled = disabledImages.includes(src);
+
+    if (isToggled) {
+      disabledImages.splice(disabledImages.indexOf(src), 1);
+    } else {
+      disabledImages.push(src);
+    }
+
+    return dispatch({
+      type: ACTION_NAMES.SET_DISABLED_IMAGES,
+      payload: disabledImages,
+    });
+  };
+
 export const generateTimelapse =
   ({ dispatch, getState }) =>
   async () => {

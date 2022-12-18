@@ -4,15 +4,17 @@ import Card from '../../Card';
 import ImageListPaginated from '../../ImageListPaginated';
 import ProgressBar from '../../ProgressBar';
 import styles from './styles.module.scss';
+import { useMemo } from 'react';
 
 const Upload = () => {
   const {
-    state: { images, progress, timelapseLoading },
-    actions: { generateTimelapse },
+    state: { images, disabledImages, progress, timelapseLoading },
+    actions: { generateTimelapse, toggleImage },
   } = useTimelapseContext();
 
-  const imageUrls = Object.values(images).map((img) =>
-    URL.createObjectURL(img)
+  const imageUrls = useMemo(
+    () => Object.values(images).map((img) => URL.createObjectURL(img)),
+    [images]
   );
 
   return (
@@ -28,7 +30,11 @@ const Upload = () => {
       )}
       {!!imageUrls.length && (
         <Card>
-          <ImageListPaginated srcs={imageUrls} onImageClick={console.log} />
+          <ImageListPaginated
+            srcs={imageUrls}
+            isImageDisabled={({ src }) => disabledImages.includes(src)}
+            onImageClick={({ src }) => toggleImage(src)}
+          />
         </Card>
       )}
     </div>
