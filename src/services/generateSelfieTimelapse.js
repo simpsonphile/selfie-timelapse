@@ -15,7 +15,7 @@ const transformImage = async (image, scale, dx, dy, nWidth, nHeight) => {
 
   ctx.drawImage(image, dx, dy, image.width * scale, image.height * scale);
 
-  const url = canvas.toDataURL();
+  const url = canvas.toDataURL('image/jpeg');
 
   newImage.src = url;
 
