@@ -1,0 +1,8 @@
+{
+  "short_name": "Selfie time lapse",
+  "name": "Selfie time lapse",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
