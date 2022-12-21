@@ -9,7 +9,7 @@ const UploadDropzone = ({ onDrop }) => {
   return (
     <div {...getRootProps()} className={styles.UploadDropzone}>
       <input {...getInputProps()} />
-      <BsUpload />
+      <BsUpload size={24} />
       {isDragActive ? (
         <p>Drop the files here ...</p>
       ) : (

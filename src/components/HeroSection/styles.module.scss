@@ -1,0 +1,42 @@
+.Hero {
+  display: flex;
+  height: 70rem;
+  padding: 100px 0;
+
+  & > * {
+    width: 50%;
+  }
+
+  & > *:first-child {
+    position: relative;
+  }
+
+  img {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    max-width: 480px;
+    border-radius: 8px;
+  }
+
+  img:nth-child(2) {
+    transform: translate(30%, 50%);
+  }
+
+  img:nth-child(3) {
+    transform: translate(10%, 100%);
+  }
+
+  & > *:last-child {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    margin-top: -140px;
+    padding: var(--g5);
+
+    & > *:last-child {
+      margin-top: 40px;
+    }
+  }
+}

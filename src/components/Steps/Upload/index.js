@@ -1,6 +1,7 @@
 import { useTimelapseContext } from '../../../contexts/TimelapseContext';
-import Header from '../../Header';
-import Headline from '../../Headline';
+// import Header from '../../Header';
+// import Headline from '../../Headline';
+import HeroSection from '../../HeroSection';
 import UploadDropzone from '../../UploadDropzone';
 
 const Upload = () => {
@@ -15,11 +16,9 @@ const Upload = () => {
 
   return (
     <div>
-      <Header>
-        <Headline>Upload files</Headline>
-      </Header>
-      <p>choose photos with eyes open</p>
-      <UploadDropzone onDrop={onFileUpload} />
+      <HeroSection>
+        <UploadDropzone onDrop={onFileUpload} />
+      </HeroSection>
     </div>
   );
 };

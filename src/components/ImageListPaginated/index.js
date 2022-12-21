@@ -31,7 +31,6 @@ const ImageListPaginated = ({ srcs, perPage = 15, ...otherProps }) => {
             onClick={onPrev}
           >
             <BsChevronLeft size={28} strokeWidth={2} />
-            {/* Prev */}
           </Button>
           <Button
             variation="transparent"
@@ -39,7 +38,6 @@ const ImageListPaginated = ({ srcs, perPage = 15, ...otherProps }) => {
             onClick={onNext}
           >
             <BsChevronRight size={28} strokeWidth={2} />
-            {/* Next */}
           </Button>
         </div>
       </div>

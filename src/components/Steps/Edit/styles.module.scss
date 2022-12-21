@@ -6,6 +6,16 @@
     gap: var(--g3);
     padding-left: var(--g5);
 
+    &Title {
+      display: flex;
+      align-items: center;
+      gap: var(--g2);  
+
+      h2 {
+        margin-top: -8px;
+      }
+    }
+
     &GenerateBtn {
       width: 200px;
     }

@@ -6,18 +6,27 @@ import styles from './styles.module.scss';
 import Spinner from '../../Spinner';
 import Header from '../../Header';
 import Headline from '../../Headline';
+import { BsChevronLeft } from 'react-icons/bs';
 
 const Upload = () => {
   const {
     state: { images, disabledImages, timelapseLoading },
-    actions: { generateTimelapse, toggleImage },
+    actions: { generateTimelapse, toggleImage, setCurrentStep },
   } = useTimelapseContext();
 
   return (
     <div>
       {!!images.length && (
         <Header className={styles.EditHeader}>
-          <Headline>Choose uploaded files</Headline>
+          <div className={styles.EditHeaderTitle}>
+            <Button
+              variation="transparent"
+              onClick={() => setCurrentStep('UPLOAD')}
+            >
+              <BsChevronLeft size={28} strokeWidth={2} />
+            </Button>
+            <Headline>Choose uploaded files</Headline>
+          </div>
 
           <Button
             className={styles.EditHeaderGenerateBtn}
