@@ -4,6 +4,9 @@ import Card from '../../Card';
 import ImageListPaginated from '../../ImageListPaginated';
 import styles from './styles.module.scss';
 import Spinner from '../../Spinner';
+import Header from '../../Header';
+import Headline from '../../Headline';
+
 const Upload = () => {
   const {
     state: { images, disabledImages, timelapseLoading },
@@ -13,8 +16,9 @@ const Upload = () => {
   return (
     <div>
       {!!images.length && (
-        <div className={styles.EditHeader}>
-          <h2>Choose uploaded files</h2>
+        <Header className={styles.EditHeader}>
+          <Headline>Choose uploaded files</Headline>
+
           <Button
             className={styles.EditHeaderGenerateBtn}
             icoRight={timelapseLoading ? <Spinner /> : undefined}
@@ -22,7 +26,7 @@ const Upload = () => {
           >
             generate Timelapse
           </Button>
-        </div>
+        </Header>
       )}
       {!!images.length && (
         <Card>
