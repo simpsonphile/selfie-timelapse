@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/selfie-timelapse/static/css/main.dc39b261.css",
+    "main.css": "/selfie-timelapse/static/css/main.e76ad90c.css",
     "main.js": "/selfie-timelapse/static/js/main.62b475b1.js",
     "static/js/787.ea8ab6ff.chunk.js": "/selfie-timelapse/static/js/787.ea8ab6ff.chunk.js",
     "index.html": "/selfie-timelapse/index.html",
-    "main.dc39b261.css.map": "/selfie-timelapse/static/css/main.dc39b261.css.map",
+    "main.e76ad90c.css.map": "/selfie-timelapse/static/css/main.e76ad90c.css.map",
     "main.62b475b1.js.map": "/selfie-timelapse/static/js/main.62b475b1.js.map",
     "787.ea8ab6ff.chunk.js.map": "/selfie-timelapse/static/js/787.ea8ab6ff.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.dc39b261.css",
+    "static/css/main.e76ad90c.css",
     "static/js/main.62b475b1.js"
   ]
 }
