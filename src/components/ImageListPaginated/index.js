@@ -28,6 +28,7 @@ const ImageListPaginated = ({ srcs, perPage = 15, ...otherProps }) => {
           <Button
             variation="transparent"
             disabled={currentPage <= 0}
+            aria-label="previous page"
             onClick={onPrev}
           >
             <BsChevronLeft size={28} strokeWidth={2} />
@@ -35,6 +36,7 @@ const ImageListPaginated = ({ srcs, perPage = 15, ...otherProps }) => {
           <Button
             variation="transparent"
             disabled={currentPage + 1 >= pages}
+            aria-label="next page"
             onClick={onNext}
           >
             <BsChevronRight size={28} strokeWidth={2} />
