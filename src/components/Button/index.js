@@ -25,8 +25,10 @@ const Button = forwardRef(
 
     return (
       <Component ref={ref} {...otherProps} className={classes}>
-        <span className={styles.ButtonLabel}>{children}</span>
-        {icoRight && <span className={styles.ButtonIco}>{icoRight}</span>}
+        <span className={styles.ButtonWrap}>
+          <span className={styles.ButtonLabel}>{children}</span>
+          {icoRight && <span className={styles.ButtonIco}>{icoRight}</span>}
+        </span>
       </Component>
     );
   }

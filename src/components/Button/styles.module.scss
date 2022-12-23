@@ -1,8 +1,6 @@
 .Button {
+  display: inline-block;
   cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: fit-content;
   text-decoration: none;
   line-height: 40px;
@@ -16,6 +14,12 @@
   color: var(--text-inverted);
   background-color: var(--primary);
   transition: all .3s;
+
+  &Wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   &:hover {
     opacity: .9;

@@ -4,7 +4,11 @@
     align-items: center;
     justify-content: space-between;
     gap: var(--g3);
-    padding-left: var(--g5);
+    padding-left: var(--g4);
+
+    @include isTablet {
+      padding-left: var(--g5);
+    }
 
     &Title {
       display: flex;

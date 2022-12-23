@@ -1,12 +1,28 @@
-@import './variables.scss';
-
 html {
   font-size: 62.5%;
+  --primary: #09bee6;
+  --gray: #E1FAF9;
+  --text-inverted: white;
+  --text: #170312;
+  // --bg: #FFE5D4;
+  --bg: #ffede1;
+  --bg2: #fff2ea;
+
+  --box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  --radius: 20px;
+
+  --g1: 4px;
+  --g2: 8px;
+  --g3: 16px;
+  --g4: 24px;
+  --g5: 32px;
+  --g6: 64px;
+  --g7: 128px;
 }
 
 body {
   font-size: 1.6rem;
-  background-color: #FFE5D4;
+  background-color: var(--bg);
   color: var(--text);
   min-width: 32rem;
 }

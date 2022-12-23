@@ -3,6 +3,7 @@ import Button from '../../Button';
 import { BsDownload } from 'react-icons/bs';
 import Headline from '../../Headline';
 import Header from '../../Header';
+import styles from './styles.module.scss';
 
 const Upload = () => {
   const {
@@ -15,17 +16,26 @@ const Upload = () => {
   };
 
   return (
-    <div>
+    <div className={styles.Finish}>
       <Header>
         <Headline>Your timelapse is ready to download!</Headline>
       </Header>
-      {!!zipURL && (
-        <Button href={zipURL} as="a" icoRight={<BsDownload />}>
-          download images as zip
+
+      <div className={styles.FinishButtons}>
+        {!!zipURL && (
+          <Button href={zipURL} as="a" icoRight={<BsDownload />}>
+            download images as zip
+          </Button>
+        )}
+
+        <Button variation="secondary" onClick={resetStore}>
+          Try again
         </Button>
-      )}
-      <Button onClick={resetStore}>Try again</Button>
-      <Button onClick={goBack}>Go back to edit</Button>
+
+        <Button variation="secondary" onClick={goBack}>
+          Go back to edit
+        </Button>
+      </div>
     </div>
   );
 };

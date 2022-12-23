@@ -1,0 +1,9 @@
+.Finish {
+  text-align: center;
+
+  &Buttons {
+    & > * {
+      margin: var(--g2);
+    }
+  }
+}

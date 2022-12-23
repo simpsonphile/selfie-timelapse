@@ -1,6 +1,10 @@
 .Card {
-  padding: var(--g4) var(--g5);
-  background: #ffede1;
+  padding: var(--g3) var(--g4);
+  background: var(--bg2);
   box-shadow: var(--box-shadow);
   border-radius: var(--radius);
+
+  @include isTablet {
+    padding: var(--g4) var(--g5);
+  }
 }
